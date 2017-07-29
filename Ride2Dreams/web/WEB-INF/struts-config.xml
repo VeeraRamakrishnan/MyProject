@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+
+<struts-config>
+    <form-beans>
+    <form-bean name="rid" type="RegisterRider.RegisterationBean"/>
+    <form-bean name="log" type="LoginRider.LoginBean"/>
+    <form-bean name="adm" type="Admin.AdminBean"/>
+    <form-bean name="dele" type="DeleteRider.DeleteRiderBean"/>
+    
+    </form-beans>
+    
+    
+    <action-mappings>
+        <action path="/register" name="rid" input="/Ride_Up_Register.jsp" scope="request" validate="true"  type="RegisterRider.RegisterationAction">
+        <forward name="success" path="/SuccessfullyRegisterd.jsp"/>
+        <forward name="error" path="/Ride_Up_Register.jsp"/>
+        </action>
+        
+            
+            
+        <action path="/login" name="log" validate="true" input="/Ride_In.jsp" scope="request" type="LoginRider.LoginAction">
+        <forward name="success" path="/WelcomeRider.jsp"/>
+        <forward name="error" path="/InvalidRider.jsp"/>
+        </action>
+        
+        <action path="/changelang" type="LoginRider.ChangeLanguageController">
+        <forward name="index" path="/Ride_In.jsp"/>    
+        </action>
+        
+        <action path="/change" type="RegisterRider.ChangeLanguageController">
+        <forward name="success" path="/Ride_Up_Register.jsp"/>    
+        </action>
+        
+        
+        
+        <action path="/profile" type="ViewRiderProfile.Profile" scope="request">
+            <forward name="index" path="/Profile.jsp"/>
+            </action>
+        
+        <action path="/adminlogin" name="adm" input="/AdminEntry.jsp" scope="request" type="Admin.AdminAction">
+            <forward name="success" path="/WelcomeAdmin.jsp"/>
+            <forward name="error" path="/InvalidAdmin.jsp"/>
+         </action>   
+          
+            
+        <action path="/delete" name="dele" input="/DeleteRider.jsp" validate="true" type="DeleteRider.DeleteRiderAction">
+            <forward name="success" path="/SuccessfullyDeleted.jsp"/>
+            <forward name="error" path="/InvalidRider.jsp"/>
+        </action>
+
+        <action path="/profile" type="ViewRiderProfile.Profile" >
+            <forward name="suc" path="/Profile.jsp"/>
+</action>
+    </action-mappings>
+    
+   <message-resources parameter="Resources/Messages"/>
+   
+
+</struts-config>
